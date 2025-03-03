@@ -1,16 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { HomeSummary } from './pages/HomeSummary';
+import { Login } from './pages/Login';
+import { Landing } from './pages/Landing';
+import { UserProvider } from './components/UserContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to MoodMoney!
-        </p>
-      </header>
-    </div>
+    <UserProvider>
+    <Routes>
+      <Route path="/" element={<Landing />}/>
+      <Route path="/login" element={<Login />}/>
+      <Route path="/homeSummary" element={<HomeSummary />}/>
+    </Routes>
+    </UserProvider>
   );
 }
 
