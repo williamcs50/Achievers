@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+.font-luckiest {
+  font-family: 'Luckiest Guy', cursive;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -36,9 +42,7 @@ h1 {
 }
 
 button {
-  padding: 0.6em 1.2em;
   font-size: 1em;
-  font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
 }
