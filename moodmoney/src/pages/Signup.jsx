@@ -1,15 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import MoodMoneyLogo from '../assets/MoodMoneyLogo.png'
+import { IoArrowBack } from "react-icons/io5";
+
 
 export default function Signup() {
   return (
     <div className="w-screen min-h-screen flex flex-col items-center justify-start bg-white px-4 pt-6">
       {/* Back arrow */}
       <div className="w-full max-w-sm">
-        <Link to="/" className="text-2xl text-green-700 hover:text-green-800">
-          ←
-        </Link>
+        <Link to="/">
+  <div className="w-10 h-10 flex items-center justify-center bg-green-600 rounded-full mt-4">
+    <IoArrowBack className="text-yellow-400 text-xl" />
+  </div>
+</Link>
+
       </div>
 
       {/* Logo */}
