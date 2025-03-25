@@ -19,10 +19,13 @@ function App() {
       </button>
     </Link>
 
+    
       <p className="text-sm text-gray-700 mb-1">Already have an account?</p>
+    <Link to='/login'>
       <button className="bg-green-600 text-white font-bold font-luckiest px-8 py-3 rounded-lg border-4 border-yellow-400 hover:bg-green-700 transition">
         SIGN IN
       </button>
+    </Link>
     </div>
   );
 }
