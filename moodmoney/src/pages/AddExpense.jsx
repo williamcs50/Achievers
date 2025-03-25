@@ -61,13 +61,23 @@ export default function AddExpense() {
         className="w-full max-w-sm px-4 py-3 mb-4 border-2 border-green-600 bg-green-100 rounded-md text-black"
       />
 
-      <input
-        type="text"
-        placeholder="Pick a Category"
+        <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
         className="w-full max-w-sm px-4 py-3 mb-6 border-2 border-green-600 bg-green-100 rounded-md text-black"
-      />
+        >
+        <option value="">Pick a Category</option>
+        <option value="Dining Out">Dining Out</option>
+        <option value="Groceries">Groceries</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Food">Food</option>
+        <option value="Transportation">Transportation</option>
+        <option value="Health">Health</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Other">Other</option>
+        </select>
+
 
       <h2 className="text-lg font-luckiest text-green-700 mb-2 text-center">HOW DID THIS PURCHASE MAKE YOU FEEL?</h2>
 
