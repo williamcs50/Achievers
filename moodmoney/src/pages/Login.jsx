@@ -26,8 +26,8 @@ export default function Login() {
 
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
-      console.log(res.data); // Can save user to localStorage here
-      navigate('/'); // or navigate to a dashboard/home page
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      navigate('/dashboard')
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     }
