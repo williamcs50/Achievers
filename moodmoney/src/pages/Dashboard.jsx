@@ -102,8 +102,9 @@ export default function Dashboard() {
                     <td className="p-2 text-center">
                       <input
                         type="number"
+                        step="0.01"
                         name="amount"
-                        value={editFields.amount}
+                        value={Number(editFields.amount).toFixed(2)}
                         onChange={handleEditChange}
                         className="w-20 px-2 py-1 h-10 rounded text-black text-center"
                       />
@@ -113,9 +114,8 @@ export default function Dashboard() {
                         name="category"
                         value={editFields.category}
                         onChange={handleEditChange}
-                        className="w-28 px-2 py-1 h-10 rounded text-black text-center"
+                        className="w-40 pr-0 px-2 py-1 h-10 rounded text-black text-center"
                     >
-                        <option value="">Select Category</option>
                         <option value="Dining Out">Dining Out</option>
                         <option value="Groceries">Groceries</option>
                         <option value="Clothing">Clothing</option>
@@ -132,9 +132,9 @@ export default function Dashboard() {
                       <input
                         type="date"
                         name="date"
-                        value={editFields.date}
+                        value={editFields.date?.slice(0, 10)}
                         onChange={handleEditChange}
-                        className="px-2 py-1 h-10 rounded text-black text-center"
+                        className="pr-0 px-2 py-1 h-10 rounded text-black text-center"
                       />
                     </td>
                     <td className="p-2 text-center">
@@ -142,7 +142,7 @@ export default function Dashboard() {
                         name="mood"
                         value={editFields.mood}
                         onChange={handleEditChange}
-                        className="w-28 px-2 py-1 h-10 rounded text-black text-center"
+                        className="w-40 pr-0 px-2 py-1 h-10 rounded text-black text-center"
                     >
                         <option value="">Select Mood</option>
                         <option value="Calm">Calm</option>
