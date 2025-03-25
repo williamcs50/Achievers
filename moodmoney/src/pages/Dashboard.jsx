@@ -1,37 +1,79 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import BottomNav from '../components/BottomNav';
 
 export default function Dashboard() {
-  const navigate = useNavigate()
-  const [userData, setUserData] = useState(null)
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editFields, setEditFields] = useState({});
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (!user) return navigate('/')
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return navigate('/');
+    fetchUserData(user._id);
+  }, []);
 
-    axios.get(`http://localhost:5000/api/auth/dashboard/${user._id}`)
-      .then(res => setUserData(res.data))
-      .catch(err => console.error(err))
-  }, [])
+  const fetchUserData = async (userId) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/api/auth/dashboard/${userId}`);
+      setUserData(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  if (!userData) return <p>Loading...</p>
+  const handleDelete = async (expenseId) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+
+    try {
+      await axios.delete(`http://localhost:5000/api/expenses/${user._id}/${expenseId}`);
+      fetchUserData(user._id);
+    } catch (err) {
+      console.error('Failed to delete expense:', err);
+    }
+  };
+
+  const handleEditClick = (index, exp) => {
+    setEditIndex(index);
+    setEditFields({ ...exp });
+  };
+
+  const handleEditChange = (e) => {
+    setEditFields({ ...editFields, [e.target.name]: e.target.value });
+  };
+
+  const handleEditSave = async (expenseId) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+
+    try {
+      await axios.put(`http://localhost:5000/api/expenses/${user._id}/${expenseId}`, editFields);
+      setEditIndex(null);
+      fetchUserData(user._id);
+    } catch (err) {
+      console.error('Failed to update expense:', err);
+    }
+  };
+
+  if (!userData) return <p>Loading...</p>;
 
   return (
-    <div className="min-h-screen bg-white p-6 font-luckiest text-green-700">
+    <div className="min-h-screen bg-white p-6 font-luckiest text-green-700 pb-20">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-luckiest">Hi, {userData.name}!</h1>
-  
+        <h1 className="text-2xl">Hi, {userData.name}!</h1>
         <button
-            onClick={() => {
+          onClick={() => {
             localStorage.removeItem('user');
             navigate('/');
-            }}
-            className="text-sm bg-red-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-red-600 transition"
+          }}
+          className="text-sm bg-red-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-red-600 transition"
         >
-            Logout
+          Logout
         </button>
-        </div>
+      </div>
 
       <h2 className="text-lg mb-2">TOTAL MONEY SPENT THIS MONTH</h2>
       <p className="text-2xl text-black font-bold mb-4">${userData.totalThisMonth.toFixed(2)}</p>
@@ -43,20 +85,100 @@ export default function Dashboard() {
             <th className="p-2">AMOUNT SPENT</th>
             <th className="p-2">CATEGORY</th>
             <th className="p-2">DATE</th>
-            <th className="p-2">MOOD SELECTED</th>
+            <th className="p-2">MOOD</th>
+            <th className="p-2">ACTIONS</th>
           </tr>
         </thead>
         <tbody>
-          {userData.recentExpenses.map((exp, i) => (
-            <tr key={i}>
-              <td className="p-2 text-center">${exp.amount.toFixed(2)}</td>
-              <td className="p-2 text-center">{exp.category}</td>
-              <td className="p-2 text-center">{new Date(exp.date).toLocaleDateString()}</td>
-              <td className="p-2 text-center">{exp.mood}</td>
+          {userData.recentExpenses.length === 0 ? (
+            <tr>
+              <td colSpan="5" className="text-center py-4">No expenses made this month.</td>
             </tr>
-          ))}
+          ) : (
+            userData.recentExpenses.map((exp, i) => (
+              <tr key={i}>
+                {editIndex === i ? (
+                  <>
+                    <td className="p-2 text-center">
+                      <input
+                        type="number"
+                        name="amount"
+                        value={editFields.amount}
+                        onChange={handleEditChange}
+                        className="w-20 px-2 py-1 rounded text-black"
+                      />
+                    </td>
+                    <td className="p-2 text-center">
+                      <input
+                        type="text"
+                        name="category"
+                        value={editFields.category}
+                        onChange={handleEditChange}
+                        className="w-24 px-2 py-1 rounded text-black"
+                      />
+                    </td>
+                    <td className="p-2 text-center">
+                      <input
+                        type="date"
+                        name="date"
+                        value={editFields.date}
+                        onChange={handleEditChange}
+                        className="px-2 py-1 rounded text-black"
+                      />
+                    </td>
+                    <td className="p-2 text-center">
+                      <input
+                        type="text"
+                        name="mood"
+                        value={editFields.mood}
+                        onChange={handleEditChange}
+                        className="w-24 px-2 py-1 rounded text-black"
+                      />
+                    </td>
+                    <td className="p-2 text-center">
+                      <button
+                        onClick={() => handleEditSave(exp._id)}
+                        className="text-yellow-400 hover:underline text-xs mr-2"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditIndex(null)}
+                        className="text-gray-300 hover:underline text-xs"
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className="p-2 text-center">${exp.amount.toFixed(2)}</td>
+                    <td className="p-2 text-center">{exp.category}</td>
+                    <td className="p-2 text-center">{new Date(exp.date.slice(0, 10) + 'T12:00:00').toLocaleDateString()}</td>
+                    <td className="p-2 text-center">{exp.mood}</td>
+                    <td className="p-2 text-center">
+                      <button
+                        onClick={() => handleEditClick(i, exp)}
+                        className="text-yellow-400 hover:underline text-xs mr-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(exp._id)}
+                        className="text-red-500 hover:underline text-xs"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </>
+                )}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
+
+      <BottomNav />
     </div>
-  )
+  );
 }
