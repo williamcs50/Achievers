@@ -56,7 +56,51 @@ export default function Dashboard() {
     } catch (err) {
       console.error('Failed to update expense:', err);
     }
+    
   };
+
+  console.log("FULL USER DATA", userData);
+
+
+  let totalExpenses = 0;
+  let topCategory = 'N/A';
+  let mostCommonMood = 'N/A';
+  let largestPurchase = 0;
+
+  if (userData?.expenses?.length > 0) {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+  
+    const monthlyExpenses = userData.expenses.filter((e) => {
+      const date = new Date(e.date);
+      return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+    });
+  
+    totalExpenses = monthlyExpenses.length;
+
+    const categoryCount = {};
+    monthlyExpenses.forEach((e) => {
+    categoryCount[e.category] = (categoryCount[e.category] || 0) + 1;
+        });
+    topCategory = Object.keys(categoryCount).reduce((a, b) =>
+    categoryCount[a] > categoryCount[b] ? a : b,
+    'N/A'
+  );
+
+  const moodCount = {};
+  monthlyExpenses.forEach((e) => {
+    moodCount[e.mood] = (moodCount[e.mood] || 0) + 1;
+  });
+  mostCommonMood = Object.keys(moodCount).reduce((a, b) =>
+    moodCount[a] > moodCount[b] ? a : b,
+    'N/A'
+  );
+
+  largestPurchase = Math.max(...monthlyExpenses.map((e) => e.amount));
+
+
+}
 
   if (!userData) return <p>Loading...</p>;
 
@@ -75,10 +119,12 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <h2 className="text-lg mb-2">TOTAL MONEY SPENT THIS MONTH</h2>
-      <p className="text-2xl text-black font-bold mb-4">${userData.totalThisMonth.toFixed(2)}</p>
+      <div className="text-center mb-6">
+        <h2 className="text-lg">TOTAL MONEY SPENT THIS MONTH</h2>
+        <p className="text-2xl text-black font-bold">${userData.totalThisMonth.toFixed(2)}</p>
+        </div>
 
-      <h3 className="text-md mb-2">LIST OF LAST 5 PURCHASES:</h3>
+    <h3 className="text-lg mb-2 text-center">LIST OF LAST 5 PURCHASES:</h3>
       <table className="w-full bg-green-600 text-white rounded-md text-sm">
         <thead className="text-yellow-400">
           <tr>
@@ -210,6 +256,29 @@ export default function Dashboard() {
           )}
         </tbody>
       </table>
+
+      <div className="mt-10 text-center">
+        <h3 className="text-lg font-luckiest text-green-700 mb-4 uppercase">Spending Highlights</h3>
+
+        <div className="space-y-4 text-black text-base font-sans">
+        <p className="mb-2">
+            <span className="font-semibold">Total Expenses This Month:</span> {totalExpenses}
+        </p>
+        <p className="mb-2">
+            <span className="font-semibold">Top Spending Category:</span> {topCategory}
+        </p>
+        <p className="mb-2">
+            <span className="font-semibold">Most Selected Mood:</span> {mostCommonMood}
+        </p>
+        <p className="mb-6">
+            <span className="font-semibold">Largest Single Purchase:</span> ${largestPurchase.toFixed(2)}
+        </p>
+        </div>
+
+        <button className="bg-green-600 text-white font-luckiest py-2 px-6 rounded-lg border-4 border-yellow-400 hover:bg-green-700 transition">
+          VIEW ALL
+        </button>
+      </div>
 
       <BottomNav />
     </div>

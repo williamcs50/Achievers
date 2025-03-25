@@ -6,6 +6,7 @@ import { FaCheck } from 'react-icons/fa';
 
 
 
+
 const moodOptions = [
   ['Calm', 'Relaxed', 'Content', 'Happy', 'Excited'],
   ['Relieved', 'Hopeful', 'Motivated', 'Focused', 'Confident'],
@@ -17,22 +18,34 @@ export default function AddExpense() {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [selectedMood, setSelectedMood] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSave = async () => {
+    setError(''); // reset previous error
+  
+    const missingFields = [];
+  
+    if (!amount) missingFields.push('enter an amount');
+    if (!category) missingFields.push('select a category');
+    if (!selectedMood) missingFields.push('select a mood');
+  
+    if (missingFields.length > 0) {
+      // Join the messages with proper grammar
+      const formatted = missingFields.join(', ').replace(/, ([^,]*)$/, ' and $1');
+      setError(`Please ${formatted}.`);
+      return;
+    }
+  
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) return alert('User not logged in');
-
-    // Get today's date in local time
-    // Get today's date in local time (correctly formatted)
+  
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const localDate = `${year}-${month}-${day}`;
-
-
-
+  
     try {
       await axios.post('http://localhost:5000/api/expenses/add', {
         userId: user._id,
@@ -41,13 +54,14 @@ export default function AddExpense() {
         mood: selectedMood,
         date: localDate
       });
-
+  
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
       alert('Error saving expense');
     }
   };
+  
 
   return (
     <div className="w-screen min-h-screen bg-white px-6 py-6 flex flex-col items-center">
@@ -111,6 +125,14 @@ export default function AddExpense() {
       >
         SAVE EXPENSE
       </button>
+
+      {error && (
+        <p className="text-red-600 mt-3 text-center font-bold">
+            {error}
+        </p>
+        )}
+
+
       <BottomNav />
     </div>
   );
