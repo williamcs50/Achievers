@@ -1,9 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import MoodMoneyLogo from '../assets/MoodMoneyLogo.png'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MoodMoneyLogo from '../assets/MoodMoneyLogo.png';
 import { IoArrowBack } from "react-icons/io5";
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      console.log(res.data); // Can save user to localStorage here
+      navigate('/'); // or navigate to a dashboard/home page
+    } catch (err) {
+      setError(err.response?.data?.error || 'Login failed');
+    }
+  };
+
   return (
     <div className="w-screen min-h-screen flex flex-col items-center justify-start bg-white px-4 pt-6">
       {/* Back arrow */}
@@ -19,14 +48,17 @@ export default function Login() {
       <img src={MoodMoneyLogo} alt="MoodMoney Logo" className="w-48 sm:w-64 h-auto mb-6" />
 
       {/* Title */}
-      <h1 className="text-xl font-bold text-green-700 mb-4 font-luckiest">WELCOME BACK!</h1>
+      <h1 className="text-xl font-bold text-green-700 mb-4 font-luckiest">WELCOME BACK</h1>
 
       {/* Form fields */}
-      <form className="w-full max-w-sm flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col gap-4">
         <div>
           <label className="block text-gray-700 mb-1">Username</label>
           <input
             type="text"
+            name="username"
+            onChange={handleChange}
+            value={formData.username}
             className="w-full px-4 py-2 border-2 border-green-600 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
         </div>
@@ -35,13 +67,17 @@ export default function Login() {
           <label className="block text-gray-700 mb-1">Password</label>
           <input
             type="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
             className="w-full px-4 py-2 border-2 border-green-600 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
         </div>
 
-        {/* Submit Button (functionality comes later) */}
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
         <button
-          type="button"
+          type="submit"
           className="w-40 mx-auto mt-4 bg-green-600 text-white font-bold py-2 rounded-lg border-4 border-yellow-400 hover:bg-green-700 transition font-luckiest"
         >
           SIGN IN

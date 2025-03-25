@@ -22,4 +22,25 @@ router.post('/register', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+  
+      // Check if user exists
+      const user = await User.findOne({ username });
+      if (!user) return res.status(400).json({ error: 'User not found' });
+  
+      // Check password (plaintext for now)
+      if (user.password !== password) {
+        return res.status(400).json({ error: 'Invalid password' });
+      }
+  
+      res.status(200).json({ message: 'Login successful', user });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
+
 export default router;
