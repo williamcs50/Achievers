@@ -41,6 +41,31 @@ router.post('/login', async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   });
+
+  router.get('/dashboard/:userId', async (req, res) => {
+    try {
+      const user = await User.findById(req.params.userId);
+  
+      if (!user) return res.status(404).json({ error: 'User not found' });
+  
+      const currentMonth = new Date().getMonth();
+      const totalThisMonth = user.expenses
+        .filter(e => new Date(e.date).getMonth() === currentMonth)
+        .reduce((sum, e) => sum + e.amount, 0);
+  
+      const last5 = [...user.expenses].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+  
+      res.json({
+        name: user.firstName,
+        totalThisMonth,
+        recentExpenses: last5
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+  });
+  
   
 
 export default router;
