@@ -5,6 +5,7 @@ import Welcome from './pages/Welcome'
 import Signup from './pages/Signup.jsx' 
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import AddExpense from './pages/AddExpense.jsx';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-expense" element={<AddExpense />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
