@@ -38,7 +38,10 @@ export default function Dashboard() {
 
   const handleEditClick = (index, exp) => {
     setEditIndex(index);
-    setEditFields({ ...exp });
+    setEditFields({ 
+        ...exp, 
+        amount: exp.amount.toFixed(2)  // Format only once here
+      });      
   };
 
   const handleEditChange = (e) => {
@@ -150,7 +153,7 @@ export default function Dashboard() {
                         type="number"
                         step="0.01"
                         name="amount"
-                        value={Number(editFields.amount).toFixed(2)}
+                        value={editFields.amount}
                         onChange={handleEditChange}
                         className="w-20 px-2 py-1 h-10 rounded text-black text-center"
                       />
