@@ -58,7 +58,8 @@ router.post('/login', async (req, res) => {
       res.json({
         name: user.firstName,
         totalThisMonth,
-        recentExpenses: last5
+        recentExpenses: last5,
+        expenses: user.expenses
       });
     } catch (err) {
       console.error(err);
