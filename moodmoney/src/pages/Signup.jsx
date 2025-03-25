@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import MoodMoneyLogo from '../assets/MoodMoneyLogo.png'
 import { IoArrowBack } from "react-icons/io5"
 import axios from 'axios'
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -23,8 +25,14 @@ export default function Signup() {
 
     try {
       const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      console.log("Full Response:", res);
+      console.log("res.data:", res.data);
       setMessage('✅ Account created successfully!');
-      console.log(res.data);
+      console.log("Full Response:", res);
+      console.log("res.data:", res.data);
+
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      navigate('/dashboard')
     } catch (err) {
       console.error(err);
       setMessage('❌ Error: ' + (err.response?.data?.error || 'Something went wrong.'));
