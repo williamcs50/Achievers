@@ -105,36 +105,69 @@ export default function Dashboard() {
                         name="amount"
                         value={editFields.amount}
                         onChange={handleEditChange}
-                        className="w-20 px-2 py-1 rounded text-black"
+                        className="w-20 px-2 py-1 h-10 rounded text-black text-center"
                       />
                     </td>
                     <td className="p-2 text-center">
-                      <input
-                        type="text"
+                    <select
                         name="category"
                         value={editFields.category}
                         onChange={handleEditChange}
-                        className="w-24 px-2 py-1 rounded text-black"
-                      />
+                        className="w-28 px-2 py-1 h-10 rounded text-black text-center"
+                    >
+                        <option value="">Select Category</option>
+                        <option value="Dining Out">Dining Out</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Food">Food</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Health">Health</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Other">Other</option>
+                    </select>
                     </td>
+
                     <td className="p-2 text-center">
                       <input
                         type="date"
                         name="date"
                         value={editFields.date}
                         onChange={handleEditChange}
-                        className="px-2 py-1 rounded text-black"
+                        className="px-2 py-1 h-10 rounded text-black text-center"
                       />
                     </td>
                     <td className="p-2 text-center">
-                      <input
-                        type="text"
+                    <select
                         name="mood"
                         value={editFields.mood}
                         onChange={handleEditChange}
-                        className="w-24 px-2 py-1 rounded text-black"
-                      />
+                        className="w-28 px-2 py-1 h-10 rounded text-black text-center"
+                    >
+                        <option value="">Select Mood</option>
+                        <option value="Calm">Calm</option>
+                        <option value="Relaxed">Relaxed</option>
+                        <option value="Content">Content</option>
+                        <option value="Happy">Happy</option>
+                        <option value="Excited">Excited</option>
+                        <option value="Relieved">Relieved</option>
+                        <option value="Hopeful">Hopeful</option>
+                        <option value="Motivated">Motivated</option>
+                        <option value="Focused">Focused</option>
+                        <option value="Confident">Confident</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Unsure">Unsure</option>
+                        <option value="Tired">Tired</option>
+                        <option value="Distracted">Distracted</option>
+                        <option value="Overwhelmed">Overwhelmed</option>
+                        <option value="Guilty">Guilty</option>
+                        <option value="Regretful">Regretful</option>
+                        <option value="Impulsive">Impulsive</option>
+                        <option value="Frustrated">Frustrated</option>
+                        <option value="Angry">Angry</option>
+                    </select>
                     </td>
+
                     <td className="p-2 text-center">
                       <button
                         onClick={() => handleEditSave(exp._id)}
