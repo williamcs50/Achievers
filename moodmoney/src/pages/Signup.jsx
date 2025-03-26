@@ -24,7 +24,7 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const res = await axios.post('http://localhost:5050/api/auth/register', formData);
       setMessage('✅ Account created successfully!');
       localStorage.setItem('user', JSON.stringify(res.data.user));
       navigate('/dashboard')

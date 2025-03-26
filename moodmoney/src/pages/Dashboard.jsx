@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   const fetchUserData = async (userId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/auth/dashboard/${userId}`);
+      const res = await axios.get(`http://localhost:5050/api/auth/dashboard/${userId}`);
       setUserData(res.data);
     } catch (err) {
       console.error(err);
@@ -29,7 +29,7 @@ export default function Dashboard() {
     if (!user) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/expenses/${user._id}/${expenseId}`);
+      await axios.delete(`http://localhost:5050/api/expenses/${user._id}/${expenseId}`);
       fetchUserData(user._id);
     } catch (err) {
       console.error('Failed to delete expense:', err);
@@ -53,7 +53,7 @@ export default function Dashboard() {
     if (!user) return;
 
     try {
-      await axios.put(`http://localhost:5000/api/expenses/${user._id}/${expenseId}`, editFields);
+      await axios.put(`http://localhost:5050/api/expenses/${user._id}/${expenseId}`, editFields);
       setEditIndex(null);
       fetchUserData(user._id);
     } catch (err) {
