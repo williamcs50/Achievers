@@ -47,7 +47,7 @@ export default function AddExpense() {
     const localDate = `${year}-${month}-${day}`;
   
     try {
-      await axios.post('http://localhost:5000/api/expenses/add', {
+      await axios.post('http://localhost:5050/api/expenses/add', {
         userId: user._id,
         amount,
         category,
