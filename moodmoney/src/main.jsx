@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import AddExpense from './pages/AddExpense.jsx';
 import './index.css'
+import Insights from './pages/Insights.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-expense" element={<AddExpense />} />
+        <Route path="/insights" element={<Insights />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

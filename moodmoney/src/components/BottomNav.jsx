@@ -16,7 +16,7 @@ export default function BottomNav() {
       <button disabled className="text-green-800 opacity-50 cursor-not-allowed">
         <FaBell size={24} />
       </button>
-      <button disabled className="text-green-800 opacity-50 cursor-not-allowed">
+      <button onClick={() => navigate('/insights')} className="text-green-800">
         <FaChartLine size={24} />
       </button>
     </div>
