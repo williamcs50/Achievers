@@ -52,14 +52,6 @@ export default function PendingReflections() {
     }
   }, [expenses]); // Re-run this effect whenever `expenses` changes
 
-  // Function to update expense's mood
-  const updateExpenseMood = (id, newMood) => {
-    const updatedExpenses = expenses.map((expense) =>
-      expense.id === id ? { ...expense, mood: newMood } : expense
-    );
-    setExpenses(updatedExpenses);
-  };
-
   return (
     <div className="w-screen min-h-screen bg-white px-6 py-6 flex flex-col items-center">
       <h1 className="text-2xl font-luckiest text-green-700 mb-4">PENDING REFLECTIONS</h1>
@@ -71,44 +63,24 @@ export default function PendingReflections() {
       {/* Purchases made in the last 24 hours */}
       <section className="w-full mb-6">
         <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 24 HOURS AGO</h2>
-        <div className="bg-green-100 p-4 rounded-md">
+        <div className="bg-green-500 rounded-lg p-4 w-full">
+          <div className="grid grid-cols-4 mb-2">
+            <div className="text-lg font-luckiest text-yellow-300">AMOUNT SPENT</div>
+            <div className="text-lg font-luckiest text-yellow-300">CATEGORY</div>
+            <div className="text-lg font-luckiest text-yellow-300">DATE</div>
+            <div className="text-lg font-luckiest text-yellow-300">MOOD SELECTED</div>
+          </div>
           {last24HoursExpenses.length > 0 ? (
-            <table className="table-auto w-full text-center"> {/* Center the table content */}
-              <thead className="text-white bg-green-500"> {/* Green background for header */}
-                <tr>
-                  <th>Amount Spent</th>
-                  <th>Category</th>
-                  <th>Date</th>
-                  <th>Mood Selected</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {last24HoursExpenses.map((expense) => (
-                  <tr key={expense.id}>
-                    <td>${expense.amount.toFixed(2)}</td>
-                    <td>{expense.category}</td>
-                    <td>{new Date(expense.date).toLocaleDateString()}</td>
-                    <td>{expense.mood}</td>
-                    <td>
-                      <button
-                        className="text-blue-500 underline"
-                        onClick={() => {
-                          const newMood = prompt('Enter new mood:');
-                          if (newMood) {
-                            updateExpenseMood(expense.id, newMood);
-                          }
-                        }}
-                      >
-                        Update
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            last24HoursExpenses.map((expense) => (
+              <div key={expense.id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
+                <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
+                <div className="text-white text-sm">{expense.category}</div>
+                <div className="text-white text-sm">{new Date(expense.date).toLocaleDateString()}</div>
+                <div className="text-white text-sm">{expense.mood}</div>
+              </div>
+            ))
           ) : (
-            <p>No purchases made in the last 24 hours.</p>
+            <p className="text-white">No purchases made in the last 24 hours.</p>
           )}
         </div>
       </section>
@@ -116,44 +88,24 @@ export default function PendingReflections() {
       {/* Purchases made in the last week */}
       <section className="w-full">
         <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 1 WEEK AGO</h2>
-        <div className="bg-green-100 p-4 rounded-md">
+        <div className="bg-green-500 rounded-lg p-4 w-full">
+          <div className="grid grid-cols-4 mb-2">
+            <div className="text-lg font-luckiest text-yellow-300">AMOUNT SPENT</div>
+            <div className="text-lg font-luckiest text-yellow-300">CATEGORY</div>
+            <div className="text-lg font-luckiest text-yellow-300">DATE</div>
+            <div className="text-lg font-luckiest text-yellow-300">MOOD SELECTED</div>
+          </div>
           {lastWeekExpenses.length > 0 ? (
-            <table className="table-auto w-full text-center"> {/* Center the table content */}
-              <thead className="text-white bg-green-500"> {/* Green background for header */}
-                <tr>
-                  <th>Amount Spent</th>
-                  <th>Category</th>
-                  <th>Date</th>
-                  <th>Mood Selected</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {lastWeekExpenses.map((expense) => (
-                  <tr key={expense.id}>
-                    <td>${expense.amount.toFixed(2)}</td>
-                    <td>{expense.category}</td>
-                    <td>{new Date(expense.date).toLocaleDateString()}</td>
-                    <td>{expense.mood}</td>
-                    <td>
-                      <button
-                        className="text-blue-500 underline"
-                        onClick={() => {
-                          const newMood = prompt('Enter new mood:');
-                          if (newMood) {
-                            updateExpenseMood(expense.id, newMood);
-                          }
-                        }}
-                      >
-                        Update
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            lastWeekExpenses.map((expense) => (
+              <div key={expense.id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
+                <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
+                <div className="text-white text-sm">{expense.category}</div>
+                <div className="text-white text-sm">{new Date(expense.date).toLocaleDateString()}</div>
+                <div className="text-white text-sm">{expense.mood}</div>
+              </div>
+            ))
           ) : (
-            <p>No purchases made in the last week.</p>
+            <p className="text-white">No purchases made in the last week.</p>
           )}
         </div>
       </section>
