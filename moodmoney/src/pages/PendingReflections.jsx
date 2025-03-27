@@ -80,7 +80,7 @@ export default function PendingReflections() {
               </div>
             ))
           ) : (
-            <p className="text-white">No purchases made in the last 24 hours.</p>
+            <p className="text-white text-center font-luckiest">No purchases made in the last 24 hours.</p>
           )}
         </div>
       </section>
@@ -105,7 +105,7 @@ export default function PendingReflections() {
               </div>
             ))
           ) : (
-            <p className="text-white">No purchases made in the last week.</p>
+            <p className="text-white text-center font-luckiest">No purchases made in the last week.</p>
           )}
         </div>
       </section>
