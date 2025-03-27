@@ -13,7 +13,7 @@ export default function BottomNav() {
       <button onClick={() => navigate('/add-expense')} className="text-green-800">
         <FaPlus size={28} />
       </button>
-      <button disabled className="text-green-800 opacity-50 cursor-not-allowed">
+      <button onClick={() => navigate('/pending-reflections')} className="text-green-800">
         <FaBell size={24} />
       </button>
       <button disabled className="text-green-800 opacity-50 cursor-not-allowed">
