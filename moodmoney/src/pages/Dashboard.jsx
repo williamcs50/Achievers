@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BottomNav from '../components/BottomNav';
 
@@ -101,8 +101,6 @@ export default function Dashboard() {
   );
 
   largestPurchase = Math.max(...monthlyExpenses.map((e) => e.amount));
-
-
 }
 
   if (!userData) return <p>Loading...</p>;
@@ -278,9 +276,11 @@ export default function Dashboard() {
         </p>
         </div>
 
+        <Link to="/insights">
         <button className="bg-green-600 text-white font-luckiest py-2 px-6 rounded-lg border-4 border-yellow-400 hover:bg-green-700 transition">
           VIEW ALL
         </button>
+        </Link>
       </div>
 
       <BottomNav />
