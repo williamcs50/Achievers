@@ -6,6 +6,7 @@ import Signup from './pages/Signup.jsx'
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import AddExpense from './pages/AddExpense.jsx';
+import PendingReflections from './pages/PendingReflections.jsx'
 import './index.css'
 import Insights from './pages/Insights.jsx'
 
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-expense" element={<AddExpense />} />
+        <Route path="/pending-reflections" element={<PendingReflections />} />
         <Route path="/insights" element={<Insights />} />
       </Routes>
     </BrowserRouter>
