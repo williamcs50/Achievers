@@ -51,7 +51,7 @@ export default function PendingReflections() {
                 <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
                 <div className="text-white text-sm">{expense.category}</div>
                 <div className="text-white text-sm">
-                  {new Date(expense.date).toLocaleDateString()}
+                  {new Date(expense.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
                 </div>
                 <div className="text-white text-sm">{expense.mood}</div>
               </div>
@@ -81,7 +81,7 @@ export default function PendingReflections() {
                 <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
                 <div className="text-white text-sm">{expense.category}</div>
                 <div className="text-white text-sm">
-                  {new Date(expense.date).toLocaleDateString()}
+                  {new Date(expense.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
                 </div>
                 <div className="text-white text-sm">{expense.mood}</div>
               </div>
