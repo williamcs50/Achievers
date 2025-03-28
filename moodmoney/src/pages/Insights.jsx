@@ -3,6 +3,7 @@ import {  } from 'react-router-dom';
 //import axios from 'axios';
 import BottomNav from '../components/BottomNav';
 import RadarChartMM from '../components/RadarChartMM';
+import BarChartMM from '../components/BarChartMM';
 
 export default function Insights() {
 
@@ -16,6 +17,9 @@ export default function Insights() {
             </div>
             
             <h2 className="text-2xl p-6">HOW YOUR SPENDING RELATED TO YOUR MOOD</h2>
+            <div className='w-200 h-100 py-4 relative overflow-visible pb-6 mx-auto'>
+                <BarChartMM />
+            </div>
 
             <h2 className='text-2xl p-6'>EMOTIONAL SPENDING INSIGHTS</h2>
             <div className='text-black'>
