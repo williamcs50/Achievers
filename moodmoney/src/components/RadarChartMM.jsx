@@ -83,7 +83,7 @@ const RadarChartMM = () => {
           <PolarRadiusAxis angle={30} domain={[ 0, Math.max(...chartData.map(d => d.amount), 100) ]} />
           <Radar name="Actual" dataKey="amount" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
           <Radar name="Budget" dataKey="budget" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
-          <Tooltip />
+          <Tooltip formatter={(value) => `$${value.toLocaleString()}`}/>
           <Legend />
         </RadarChart>
 
