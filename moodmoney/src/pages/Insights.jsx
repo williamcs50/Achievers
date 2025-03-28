@@ -11,13 +11,13 @@ export default function Insights() {
             <h1 className="text-2xl mb-4">YOUR SPENDING & EMOTIONAL TRENDS</h1>
 
             <h2 className="text-2xl">BUDGET VS ACTUAL SPENT</h2>
-            <div className='w-full h-100 py-4'>
+            <div className='w-full h-100 py-4 relative overflow-visible pb-6'>
                 <RadarChartMM />
             </div>
             
-            <h2 className="text-2xl">HOW YOUR SPENDING RELATED TO YOUR MOOD</h2>
+            <h2 className="text-2xl p-6">HOW YOUR SPENDING RELATED TO YOUR MOOD</h2>
 
-            <h2 className='text-2xl'>EMOTIONAL SPENDING INSIGHTS</h2>
+            <h2 className='text-2xl p-6'>EMOTIONAL SPENDING INSIGHTS</h2>
             <div className='text-black'>
             <p className='mb-2'>
                 <span className='font-semibold'>You've logged # purchases as "Mood" this week</span>

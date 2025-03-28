@@ -87,11 +87,11 @@ const RadarChartMM = () => {
           <Legend />
         </RadarChart>
 
-        <button onClick={handleEditBudget} className="text-yellow-400 hover:underline text-xs mr-2">
+        <button onClick={handleEditBudget} className="text-yellow-400 hover:underline text-xs mr-2 z-20">
             {isEditing ? "Cancel" : "Edit Budget"}
         </button>
         {isEditing && (
-            <div className="mt-6 bg-white p-4 rounded-lg shadow-md">
+            <div className="bg-white rounded-lg shadow-md z-30 p-4">
                 <h3 className="text-lg font-semibold text-gray-700 mb-3"> Set budget per Category</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {defaultCategories.map((category) => (
