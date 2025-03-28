@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import BottomNav from '../components/BottomNav';
 
-// Helper functions to manage expenses in local storage
-const getExpensesFromLocalStorage = () => {
-  const storedExpenses = localStorage.getItem('expenses');
-  return storedExpenses ? JSON.parse(storedExpenses) : [];
-};
-
-const setExpensesToLocalStorage = (expenses) => {
-  localStorage.setItem('expenses', JSON.stringify(expenses));
-};
-
 export default function PendingReflections() {
-  const [expenses, setExpenses] = useState(getExpensesFromLocalStorage());
+  const [expenses, setExpenses] = useState([]);
   const [last24HoursExpenses, setLast24HoursExpenses] = useState([]);
   const [lastWeekExpenses, setLastWeekExpenses] = useState([]);
+  const [error, setError] = useState('');
 
-  // Fetch expenses from local storage on component mount
-  useEffect(() => {
-    const initialExpenses = getExpensesFromLocalStorage();
-    setExpenses(initialExpenses);
-  }, []);
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  // Update local storage when expenses change
+  // Fetch expenses from backend on component mount
   useEffect(() => {
-    setExpensesToLocalStorage(expenses);
-  }, [expenses]);
+    const fetchExpenses = async () => {
+      try {
+        if (user) {
+          const response = await axios.get(`http://localhost:5050/api/expenses/${user._id}`);
+          setExpenses(response.data);
+        } else {
+          setError('User not logged in');
+        }
+      } catch {
+        setError('Failed to fetch expenses');
+      }
+    };
+
+    fetchExpenses();
+  }, [user]);
 
   // Filter expenses based on time
   useEffect(() => {
@@ -50,15 +51,18 @@ export default function PendingReflections() {
       setLast24HoursExpenses(last24Hours);
       setLastWeekExpenses(lastWeek);
     }
-  }, [expenses]); // Re-run this effect whenever `expenses` changes
+  }, [expenses]);
 
   return (
     <div className="w-screen min-h-screen bg-white px-6 py-6 flex flex-col items-center">
       <h1 className="text-2xl font-luckiest text-green-700 mb-4">PENDING REFLECTIONS</h1>
-      <p className="text-center text-gray-700">Reflect on Your Past Purchases</p>
+      <p className="text-center text-gray-700 mb-2">Reflect on Your Past Purchases</p>
       <p className="text-center text-gray-500 italic mb-6">
         Do you still feel the same about these purchases, or has your mood changed?
       </p>
+
+      {/* Error Message */}
+      {error && <p className="text-red-600">{error}</p>}
 
       {/* Purchases made in the last 24 hours */}
       <section className="w-full mb-6">
@@ -72,7 +76,7 @@ export default function PendingReflections() {
           </div>
           {last24HoursExpenses.length > 0 ? (
             last24HoursExpenses.map((expense) => (
-              <div key={expense.id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
+              <div key={expense._id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
                 <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
                 <div className="text-white text-sm">{expense.category}</div>
                 <div className="text-white text-sm">{new Date(expense.date).toLocaleDateString()}</div>
@@ -86,7 +90,7 @@ export default function PendingReflections() {
       </section>
 
       {/* Purchases made in the last week */}
-      <section className="w-full">
+      <section className="w-full mb-6">
         <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 1 WEEK AGO</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">
           <div className="grid grid-cols-4 mb-2">
@@ -97,7 +101,7 @@ export default function PendingReflections() {
           </div>
           {lastWeekExpenses.length > 0 ? (
             lastWeekExpenses.map((expense) => (
-              <div key={expense.id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
+              <div key={expense._id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
                 <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
                 <div className="text-white text-sm">{expense.category}</div>
                 <div className="text-white text-sm">{new Date(expense.date).toLocaleDateString()}</div>
