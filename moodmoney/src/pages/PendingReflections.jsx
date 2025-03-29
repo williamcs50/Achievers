@@ -48,12 +48,19 @@ export default function PendingReflections() {
           {last24HoursExpenses.length > 0 ? (
             last24HoursExpenses.map((expense) => (
               <div key={expense._id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
+<<<<<<< HEAD
                 <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
                 <div className="text-white text-sm">{expense.category}</div>
                 <div className="text-white text-sm">
                   {new Date(expense.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
+=======
+                <div className="text-white texr font-luckiest">${expense.amount.toFixed(2)}</div>
+                <div className="text-white text font-luckiest">{expense.category}</div>
+                <div className="text-white text font-luckiest">
+                  {new Date(expense.date).toLocaleDateString()}
+>>>>>>> ddd75aa76cc2703841c54d467f4a905e9667b699
                 </div>
-                <div className="text-white text-sm">{expense.mood}</div>
+                <div className="text-white text font-luckiest">{expense.mood}</div>
               </div>
             ))
           ) : (
@@ -78,12 +85,19 @@ export default function PendingReflections() {
                 key={expense._id}
                 className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none"
               >
+<<<<<<< HEAD
                 <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
                 <div className="text-white text-sm">{expense.category}</div>
                 <div className="text-white text-sm">
                   {new Date(expense.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
+=======
+                <div className="text-white text font-luckiest">${expense.amount.toFixed(2)}</div>
+                <div className="text-white text font-luckiest">{expense.category}</div>
+                <div className="text-white text font-luckiest">
+                  {new Date(expense.date).toLocaleDateString()}
+>>>>>>> ddd75aa76cc2703841c54d467f4a905e9667b699
                 </div>
-                <div className="text-white text-sm">{expense.mood}</div>
+                <div className="text-white text font-luckiest">{expense.mood}</div>
               </div>
             ))
           ) : (
