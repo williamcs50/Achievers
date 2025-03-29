@@ -37,7 +37,7 @@ export default function PendingReflections() {
 
       {/* Purchases made in the last week */}
       <section className="w-full mb-6">
-        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE IN THE LAST WEEK</h2>
+        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 24 Hours Ago</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">
           <div className="grid grid-cols-4 mb-2">
             <div className="text-lg font-luckiest text-yellow-300">AMOUNT SPENT</div>
@@ -64,7 +64,7 @@ export default function PendingReflections() {
 
       {/* Purchases older than a week */}
       <section className="w-full">
-        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES OLDER THAN A WEEK</h2>
+        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES Made 1 Week Ago</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">
           <div className="grid grid-cols-4 mb-2">
             <div className="text-lg font-luckiest text-yellow-300">AMOUNT SPENT</div>
