@@ -35,9 +35,9 @@ export default function PendingReflections() {
       {/* Error Message */}
       {error && <p className="text-red-600">{error}</p>}
 
-      {/* Purchases made in the last 24 hours */}
+      {/* Purchases made in the last week */}
       <section className="w-full mb-6">
-        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 24 HOURS AGO</h2>
+        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE IN THE LAST WEEK</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">
           <div className="grid grid-cols-4 mb-2">
             <div className="text-lg font-luckiest text-yellow-300">AMOUNT SPENT</div>
@@ -57,14 +57,14 @@ export default function PendingReflections() {
               </div>
             ))
           ) : (
-            <p className="text-white text-center font-luckiest">No purchases made in the last 24 hours.</p>
+            <p className="text-white text-center font-luckiest">No purchases made in the last week.</p>
           )}
         </div>
       </section>
 
-      {/* Purchases made in the last week */}
+      {/* Purchases older than a week */}
       <section className="w-full">
-        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 1 WEEK AGO</h2>
+        <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES OLDER THAN A WEEK</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">
           <div className="grid grid-cols-4 mb-2">
             <div className="text-lg font-luckiest text-yellow-300">AMOUNT SPENT</div>
@@ -87,7 +87,7 @@ export default function PendingReflections() {
               </div>
             ))
           ) : (
-            <p className="text-white text-center font-luckiest">No purchases made in the last week.</p>
+            <p className="text-white text-center font-luckiest">No purchases older than a week.</p>
           )}
         </div>
       </section>
