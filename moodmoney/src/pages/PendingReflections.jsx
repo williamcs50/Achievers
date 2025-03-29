@@ -48,12 +48,12 @@ export default function PendingReflections() {
           {last24HoursExpenses.length > 0 ? (
             last24HoursExpenses.map((expense) => (
               <div key={expense._id} className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none">
-                <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
-                <div className="text-white text-sm">{expense.category}</div>
-                <div className="text-white text-sm">
+                <div className="text-white text-sm font-luckiest">${expense.amount.toFixed(2)}</div>
+                <div className="text-white text-sm font-luckiest">{expense.category}</div>
+                <div className="text-white text-sm font-luckiest">
                   {new Date(expense.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
                 </div>
-                <div className="text-white text-sm">{expense.mood}</div>
+                <div className="text-white text-sm font-luckiest">{expense.mood}</div>
               </div>
             ))
           ) : (
@@ -78,12 +78,12 @@ export default function PendingReflections() {
                 key={expense._id}
                 className="grid grid-cols-4 items-center py-2 border-b border-green-700 last:border-none"
               >
-                <div className="text-white text-sm">${expense.amount.toFixed(2)}</div>
-                <div className="text-white text-sm">{expense.category}</div>
-                <div className="text-white text-sm">
+                <div className="text-white text-sm font-luckiest">${expense.amount.toFixed(2)}</div>
+                <div className="text-white text-sm font-luckiest">{expense.category}</div>
+                <div className="text-white text-sm font-luckiest">
                   {new Date(expense.date).toLocaleDateString("en-US", { timeZone: "UTC" })}
                 </div>
-                <div className="text-white text-sm">{expense.mood}</div>
+                <div className="text-white text-sm font-luckiest">{expense.mood}</div>
               </div>
             ))
           ) : (
