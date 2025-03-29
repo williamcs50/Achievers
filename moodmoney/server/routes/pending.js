@@ -18,7 +18,7 @@ router.get('/:userId', async (req, res) => {
     const last24Hours = user.expenses.filter((expense) => {
     const expenseDate = new Date(expense.date);
     const diffHours = (now - expenseDate) / (1000 * 60 * 60);
-    return diffHours <= 24;
+    return diffHours <= 47;
     });
 
     // Filter expenses made in the last week 
@@ -26,7 +26,7 @@ router.get('/:userId', async (req, res) => {
     const expenseDate = new Date(expense.date);
     const diffHours = (now - expenseDate) / (1000 * 60 * 60);
     const diffDays = diffHours / 24;
-    return diffHours > 24 && diffDays <= 7;
+    return diffHours > 47 && diffDays <= 7;
     });
 
     return res.json({
