@@ -13,10 +13,11 @@ router.get('/:userId', async (req, res) => {
 
     const now = new Date();
 
+    
     // Filter expenses made in the last week (0 to 7 days old)
-    const last24Hours = user.expenses.filter((expense) => {
-      const expenseDate = new Date(expense.date);
-      const diffDays = (now - expenseDate) / (1000 * 60 * 60 * 24); // Difference in days
+     const last24Hours = user.expenses.filter((expense) => {
+    const expenseDate = new Date(expense.date);
+    const diffDays = (now - expenseDate) / (1000 * 60 * 60 * 24); // Difference in days
       return diffDays > 1 && diffDays <= 7; // Include expenses that are up to 7 days old
     });
 
