@@ -12,12 +12,12 @@ export default function Insights() {
             <h1 className="text-2xl mb-4">YOUR SPENDING & EMOTIONAL TRENDS</h1>
 
             <h2 className="text-2xl">BUDGET VS ACTUAL SPENT</h2>
-            <div className='w-full h-100 py-4 relative overflow-visible pb-6'>
+            <div className='w-full h-100 py-4 relative overflow-visible pb-6 z-50'>
                 <RadarChartMM />
             </div>
             
             <h2 className="text-2xl p-6">HOW YOUR SPENDING RELATED TO YOUR MOOD</h2>
-            <div className='w-200 h-100 py-4 relative overflow-visible pb-6 mx-auto'>
+            <div className='w-200 h-100 py-4 relative overflow-visible pb-6 mx-auto z-10'>
                 <BarChartMM />
             </div>
 
