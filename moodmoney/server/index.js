@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import expenseRoutes from './routes/expense.js';
+import pendingRoutes from './routes/pending.js';
 
 dotenv.config();
 
@@ -27,3 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
     });
   })
   .catch((err) => console.log('MongoDB connection error:', err));
+
+
+app.use('/api/pending', pendingRoutes);
+

@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-expense" element={<AddExpense />} />
+        <Route path="/pending-reflections" element={<PendingReflections />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/pending-reflections" element={<PendingReflections />} />
       </Routes>
