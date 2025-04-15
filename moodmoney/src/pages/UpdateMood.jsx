@@ -55,11 +55,17 @@ export default function UpdateMood() {
     }
   }
 
+  
   // Helper function to format the date
   const formatDate = (date) => {
     if (!date) return "Unknown date"
-    const options = { year: "numeric", month: "long", day: "numeric" }
-    return new Date(date).toLocaleDateString(undefined, options)
+    const utcDate = new Date(date)
+    return utcDate.toLocaleDateString("en-US", {
+      timeZone: "UTC",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
   }
 
   return (
@@ -94,7 +100,8 @@ export default function UpdateMood() {
             <p className="text-md">
               <span className="text-green-600 font-bold font-luckiest">PURCHASE DATE: </span>
               <span className="text-black font-medium font-luckiest">
-                {formatDate(originalExpense.date)}
+              {formatDate(originalExpense.date)}
+              
               </span>
             </p>
             <p className="text-md">
