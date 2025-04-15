@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import BottomNav from "../components/BottomNav"
 
@@ -7,6 +8,7 @@ export default function PendingReflections() {
   const [lastWeekExpenses, setLastWeekExpenses] = useState([])
   const [error, setError] = useState("")
 
+  const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"))
 
   useEffect(() => {
@@ -27,10 +29,7 @@ export default function PendingReflections() {
   }, [user])
 
   const handleUpdate = (expenseId) => {
-    // For now, just log to console since update page doesn't exist yet
-    console.log(`Update requested for expense: ${expenseId}`)
-    // You can add a toast notification or alert here if desired
-    alert("Update feature coming soon!")
+    navigate(`/update-mood/${expenseId}`)
   }
 
   return (
@@ -41,10 +40,9 @@ export default function PendingReflections() {
         Do you still feel the same about these purchases, or has your mood changed?
       </p>
 
-      {/* Error Message */}
       {error && <p className="text-red-600">{error}</p>}
 
-      {/* Purchases made in the last 24 hours */}
+      {/* Last 24 Hours */}
       <section className="w-full mb-6">
         <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES MADE 24 Hours Ago</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">
@@ -83,7 +81,7 @@ export default function PendingReflections() {
         </div>
       </section>
 
-      {/* Purchases made 1 week ago */}
+      {/* Last Week */}
       <section className="w-full">
         <h2 className="text-lg font-luckiest text-green-700 mb-4 text-center">PURCHASES Made 1 Week Ago</h2>
         <div className="bg-green-500 rounded-lg p-4 w-full">

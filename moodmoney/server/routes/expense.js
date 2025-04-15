@@ -66,4 +66,27 @@ router.delete('/:userId/:expenseId', async (req, res) => {
   }
 });
 
+router.get('/:userId/:expenseId', async (req, res) => {
+  const { userId, expenseId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const expense = user.expenses.id(expenseId);
+    if (!expense) {
+      return res.status(404).json({ error: 'Expense not found' });
+    }
+
+  
+    return res.json(expense);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Failed to get expense' });
+  }
+});
+
+
 export default router;
