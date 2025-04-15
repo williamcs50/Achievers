@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import expenseRoutes from './routes/expense.js';
 import pendingRoutes from './routes/pending.js';
+import moodRoutes from './routes/mood.js';
+
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ app.use('/api/expenses', expenseRoutes);
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/mood', moodRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
