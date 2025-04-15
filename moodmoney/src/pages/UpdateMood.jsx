@@ -55,7 +55,6 @@ export default function UpdateMood() {
     }
   }
 
-  
   // Helper function to format the date
   const formatDate = (date) => {
     if (!date) return "Unknown date"
