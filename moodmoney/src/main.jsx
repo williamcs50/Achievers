@@ -23,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/pending-reflections" element={<PendingReflections />} />
         <Route path="/update-mood/:expenseId" element={<UpdateMood />} />
         <Route path="/insights" element={<Insights />} />
+        <Route path="/pending-reflections" element={<PendingReflections />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
