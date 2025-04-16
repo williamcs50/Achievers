@@ -146,6 +146,7 @@ export default function UpdateMood() {
   )
 }
 
+
 // Mood color map matching `AddExpense`
 function getMoodColor(mood) {
   const colorMap = {
