@@ -26,7 +26,6 @@ export default function UpdateMood() {
   useEffect(() => {
     const fetchExpense = async () => {
       try {
-       
         const res = await axios.get(`http://localhost:5050/api/expenses/${userId}/${expenseId}`)
         setOriginalExpense(res.data)
         setSelectedMood(res.data.mood)
@@ -41,10 +40,8 @@ export default function UpdateMood() {
     }
   }, [userId, expenseId])
 
-  
   const handleSave = async () => {
     try {
-      // Update the mood only, no need to send the entire originalExpense
       await axios.put(`http://localhost:5050/api/mood/${userId}/${expenseId}`, {
         mood: selectedMood,
       })
@@ -55,7 +52,6 @@ export default function UpdateMood() {
     }
   }
 
-  // Helper function to format the date
   const formatDate = (date) => {
     if (!date) return "Unknown date"
     const utcDate = new Date(date)
@@ -76,8 +72,7 @@ export default function UpdateMood() {
         Do you still feel the same about this purchase, or has your mood changed?
       </p>
 
-     
-     {/* Original Purchase Section */}
+      {/* Original Purchase Section */}
       {originalExpense && (
         <div className="w-full mb-6">
           <h2 className="text-2xl font-luckiest text-green-600 mb-2 text-center">
@@ -87,7 +82,7 @@ export default function UpdateMood() {
             <p className="text-lg">
               <span className="text-green-600 font-bold font-luckiest">AMOUNT SPENT: </span>
               <span className="text-black font-medium font-luckiest">
-                ${originalExpense.amount}
+                ${Number(originalExpense.amount).toFixed(2)}
               </span>
             </p>
             <p className="text-md">
@@ -99,8 +94,7 @@ export default function UpdateMood() {
             <p className="text-md">
               <span className="text-green-600 font-bold font-luckiest">PURCHASE DATE: </span>
               <span className="text-black font-medium font-luckiest">
-              {formatDate(originalExpense.date)}
-              
+                {formatDate(originalExpense.date)}
               </span>
             </p>
             <p className="text-md">
@@ -155,27 +149,27 @@ export default function UpdateMood() {
 // Mood color map matching `AddExpense`
 function getMoodColor(mood) {
   const colorMap = {
-    Calm: "#689ED9", // darker blue
-    Relaxed: "#4A90E2", // deeper soft blue
-    Content: "#377EDC", // stronger medium blue
-    Happy: "#2C5BBC", // bold blue
-    Excited: "#002EFA", // pure bold blue
-    Relieved: "#6DD96D", // deeper mint green
-    Hopeful: "#4DC84D", // fresh green
-    Motivated: "#38B738", // solid green
-    Focused: "#2A9F2A", // firm green
-    Confident: "#1E8C1E", // strong green
-    Neutral: "#D7D755", // darker yellow
-    Unsure: "#E5E541", // visible yellow
-    Tired: "#E1DD4F", // mustard yellow
-    Distracted: "#C6BD2D", // olive yellow
-    Overwhelmed: "#9A941B", // dark golden yellow
-    Guilty: "#E1A779", // burnt peach
-    Regretful: "#E1984E", // deeper orange
-    Impulsive: "#E3822E", // tangerine
-    Frustrated: "#D8611D", // burnt orange
-    Angry: "#8B2500", // darker red-brown
+    Calm: "#689ED9",
+    Relaxed: "#4A90E2",
+    Content: "#377EDC",
+    Happy: "#2C5BBC",
+    Excited: "#002EFA",
+    Relieved: "#6DD96D",
+    Hopeful: "#4DC84D",
+    Motivated: "#38B738",
+    Focused: "#2A9F2A",
+    Confident: "#1E8C1E",
+    Neutral: "#D7D755",
+    Unsure: "#E5E541",
+    Tired: "#E1DD4F",
+    Distracted: "#C6BD2D",
+    Overwhelmed: "#9A941B",
+    Guilty: "#E1A779",
+    Regretful: "#E1984E",
+    Impulsive: "#E3822E",
+    Frustrated: "#D8611D",
+    Angry: "#8B2500",
   }
 
-  return colorMap[mood] || "#888" // fallback gray color
+  return colorMap[mood] || "#888"
 }
